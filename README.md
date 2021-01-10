@@ -52,5 +52,105 @@ sudo systemctl start nginx.service
 sudo systemctl enable nginx.service
 ```
 
+### NGINX Configuration
+```
+rtmp_auto_push on;
+
+rtmp {
+  server {
+    listen 1935;
+    chunk_size 4096;
+
+    application live {
+      live on;
+      record off;
+
+      #RTMP EXAMPLES
+      #Facebook (Stunnel) RTMPS
+      push rtmp://127.0.0.1:19350/rtmp/<facebook-live-stream-key>;
+      #Facebook (Deprecated)
+      push rtmp://rtmp-pc.facebook.com:80/rtmp/{stream_key};
+      #Twitch
+      push rtmp://live-sea.twitch.tv/app/{stream_key};
+      #Youtube
+      push rtmp://x.rtmp.youtube.com/live2/{stream_key};
+    }
+  }
+}
+```
+
+### Installing Stunnel4
+```
+sudo apt install stunnel4
+```
+
+### Config Stunnel4
+#### 1.)
+```
+sudo nano /etc/stunnel/stunnel.conf
+```
+#### Type in:
+```
+setuid = stunnel4
+setgid = stunnel4
+pid=/tmp/stunnel.pid
+output = /var/log/stunnel4/stunnel.log
+include = /etc/stunnel/conf.d
+```
+
+#### 2.) Change Enable=0 to:
+```
+sudo nano /etc/default/stunnel4
+
+ENABLE=1
+```
+
+#### 3.) Create other configs
+```
+sudo mkdir /etc/stunnel/conf.d
+cd /etc/stunnel/conf.d/
+sudo touch fb.conf
+sudo nano fb.conf
+```
+
+#### 4.) Type in:
+```
+[fb-live]
+client = yes
+accept = 127.0.0.1:19350
+connect = live-api-s.facebook.com:443
+verifyChain = no
+```
+
+#### Stunnel Commands
+```
+sudo service stunnel4 start
+sudo service stunnel4 stop
+sudo service stunnel4 restart
+```
+
+##### Note: Whenever you edit the nginx.conf save it and reload without restarting nginx type in:
+```
+sudo service nginx reload
+```
+
+
+### Run OBS and change settings go to Stream tab
+```
+Service: custom 
+Server: rtmp://<server ip>/live
+Stream Key: <streamkey of your choice>
+```
+
+### To get ubuntu20 IP address open its console and type in:
+```
+ifconfig -a
+
+find eth0 (most cases)
+```
+
+
+### Enjoy Streaming!
+
 
 
