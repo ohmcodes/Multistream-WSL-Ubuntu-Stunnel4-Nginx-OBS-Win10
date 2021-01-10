@@ -149,6 +149,12 @@ ifconfig -a
 find eth0 (most cases)
 ```
 
+### Day to day startup
+```
+sudo /etc/init.d/stunnel4 start
+sudo /etc/init.d/nginx start 
+ifconfig -a
+```
 
 ### Enjoy Streaming!
 
