@@ -57,6 +57,8 @@ sudo service nginx start
 
 ### NGINX Configuration
 ```
+sudo nano /etc/nginx/nginx.conf
+
 rtmp_auto_push on;
 
 rtmp {
@@ -147,6 +149,8 @@ Stream Key: <streamkey of your choice>
 
 ### To get ubuntu20 IP address open its console and type in:
 ```
+sudo apt install net-tools
+
 ifconfig -a
 
 find eth0 (most cases)
