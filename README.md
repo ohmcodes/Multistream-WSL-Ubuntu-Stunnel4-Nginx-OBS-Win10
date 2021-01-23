@@ -56,6 +56,7 @@ sudo service nginx start
 ```
 
 ### NGINX Configuration
+#### NOTE: Replace this with your {stream_key};
 ```
 sudo nano /etc/nginx/nginx.conf
 
@@ -72,7 +73,7 @@ rtmp {
 
       #RTMP EXAMPLES
       #Facebook (Stunnel) RTMPS
-      push rtmp://127.0.0.1:19350/rtmp/<facebook-live-stream-key>;
+      push rtmp://127.0.0.1:19350/rtmp/{stream_key};
       #Facebook (Deprecated)
       push rtmp://rtmp-pc.facebook.com:80/rtmp/{stream_key};
       #Twitch
