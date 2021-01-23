@@ -50,6 +50,9 @@ sudo ufw allow 'Nginx HTTP'
 sudo systemctl stop nginx.service
 sudo systemctl start nginx.service
 sudo systemctl enable nginx.service
+
+sudo service nginx start
+{start|stop|restart|reload|force-reload|status|configtest|rotate|upgrade}
 ```
 
 ### NGINX Configuration
